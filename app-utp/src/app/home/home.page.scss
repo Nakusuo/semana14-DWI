@@ -1,0 +1,77 @@
+// 1. Contenedor principal: Fondo sutil y espaciado consistente
+ion-content {
+  --background: #f4f6f8; // Un gris muy suave y limpio
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+// 2. Estilo del formulario tipo tarjeta (Card)
+form {
+  background: #ffffff;
+  border-radius: 16px; // Bordes más suaves y modernos
+  padding: 16px;       // Espaciado interno consistente
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); // Sombra suave para dar profundidad
+  margin: 0 auto;       // Centra el formulario si la pantalla es ancha
+  max-width: 500px;     // Limita el ancho en pantallas grandes
+}
+
+// 3. Pulido de los campos de entrada de Ionic
+ion-item {
+  --border-color: #e0e0e0; // Bordes inferiores más sutiles
+  --padding-start: 0;      // Alinea el texto perfectamente a la izquierda
+  --inner-padding-end: 0;
+  --background: transparent;
+  margin-bottom: 12px;     // Espacio entre campos
+
+  ion-label {
+    color: #757575;        // Color de label más suave
+    font-weight: 500;
+  }
+}
+
+// Cambio de color cuando el campo está enfocado
+ion-item.item-has-focus {
+  --border-color: var(--ion-color-danger, #e0121c); // Rojo UTP
+  
+  ion-label {
+    color: var(--ion-color-danger, #e0121c) !important;
+  }
+}
+
+// 4. Notas de error (Validaciones) - Arreglo de visualización
+ion-note {
+  display: flex !important; // Fuerza el uso de flex
+  align-items: center;
+  font-size: 0.85rem;       // Texto un poco más pequeño
+  font-weight: 500;
+  color: #c0392b !important; // Un rojo de alerta más legible
+  background-color: #feebe7; // Fondo rojizo suave
+  border-left: 4px solid #c0392b; // Barra lateral de alerta
+  border-radius: 4px;
+  margin: -4px 16px 16px 16px !important; // Ajuste para que se vea integrado
+  padding: 8px 12px !important;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out; // Pequeña animación
+}
+
+// 5. El Botón Principal
+ion-button {
+  margin: 20px 16px;        // Separa el botón del contenido y los bordes
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  --border-radius: 10px;    // Bordes del botón modernos
+  --box-shadow: 0 4px 12px rgba(224, 18, 28, 0.25); // Sombra con color UTP
+  text-transform: none;      // Evita mayúsculas forzadas
+}
+
+// Pequeña animación para que los errores aparezcan suavemente
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
