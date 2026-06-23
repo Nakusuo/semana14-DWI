@@ -1,0 +1,7 @@
+{
+  "name": "app-utp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

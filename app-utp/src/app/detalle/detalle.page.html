@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Detalle de registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos recibidos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><b>Nombre:</b> {{ registro.nombre }}</p>
+      <p><b>Correo:</b> {{ registro.correo }}</p>
+      <p><b>Tipo:</b> {{ registro.tipoApp }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-button fill="clear" routerLink="/home"> Volver </ion-button>
+</ion-content>
