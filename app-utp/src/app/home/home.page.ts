@@ -60,8 +60,14 @@ export class HomePage implements OnInit {
       },
       error: (err) => {
         console.error('Error al conectar con el endpoint:', err);
-        this.error = 'No se pudo conectar con el endpoint. Verifica tu conexión.';
-        this.cargando = false;
+        if (err.status === 200) {
+          // Si el status es 200 OK pero falla la lectura de JSON (por ejemplo, respuesta vacía de Beeceptor)
+          this.mensaje = 'Registro guardado correctamente.';
+          this.router.navigate(['/detalle'], { queryParams: registro });
+        } else {
+          this.error = 'No se pudo conectar con el endpoint. Verifica tu conexión.';
+          this.cargando = false;
+        }
       },
       complete: () => {
         this.cargando = false;
