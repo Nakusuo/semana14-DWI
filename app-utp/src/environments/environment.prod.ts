@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://TU-ENDPOINT-EN-LA-NUBE.com/api'
+  apiBaseUrl: 'https://utp-14.free.beeceptor.com'
 };
