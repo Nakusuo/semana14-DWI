@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiBaseUrl: 'https://TU-ENDPOINT-EN-LA-NUBE.com/api'
 };
