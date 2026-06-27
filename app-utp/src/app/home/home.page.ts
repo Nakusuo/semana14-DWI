@@ -1,49 +1,75 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; // 👈 Importamos el Router aquí arriba
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Registro } from '../models/registro';
+import { RegistroApiService } from '../services/registro-api'; // <-- Importar local
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: false, // Mantenemos el componente clásico vinculado a su módulo
+  standalone: false
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  registroForm: FormGroup;
   enviado = false;
+  cargando = false;
+  mensaje = '';
+  error = '';
 
-  // Definición de la estructura del formulario reactivo
-  registroForm = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
-    correo: ['', [Validators.required, Validators.email]],
-    tipoApp: ['', Validators.required],
-  });
-
-  // Unificamos las dependencias en un solo constructor
   constructor(
     private fb: FormBuilder,
-    private router: Router // 👈 Inyectamos el Router
-  ) {}
+    private router: Router,
+    private api: RegistroApiService // <-- Inyectar servicio
+  ) {
+    this.registroForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      correo: ['', [Validators.required, Validators.email]],
+      tipoApp: ['', Validators.required] // Usamos tipoApp
+    });
+  }
 
-  // Getter para acceder fácilmente a los controles en el HTML (f.nombre, f.correo, etc.)
+  ngOnInit() {}
+
   get f() {
     return this.registroForm.controls;
   }
 
-  // Método principal que valida el formulario y navega a la siguiente página
-  validarRegistro() {
-    this.enviado = true;
+  limpiarMensajes() {
+    this.mensaje = '';
+    this.error = '';
+  }
 
-    // Si el formulario no cumple las validaciones, marca todo como tocado para mostrar los errores
+  // Versión mejorada con API
+  guardarEnNube() {
+    this.enviado = true;
+    this.limpiarMensajes();
+
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched();
       return;
     }
 
-    // Si todo está correcto, imprimimos en consola y redirigimos pasando la data
-    console.log('Registro válido, redirigiendo...', this.registroForm.value);
-    
-    this.router.navigate(['/detalle'], {
-      queryParams: this.registroForm.value
+    this.cargando = true;
+    const registro = this.registroForm.value as Registro;
+
+    this.api.guardarRegistro(registro).subscribe({
+      next: (resp) => {
+        this.mensaje = resp.mensaje || 'Registro guardado correctamente.';
+        this.router.navigate(['/detalle'], { queryParams: registro });
+      },
+      error: () => {
+        this.error = 'No se pudo conectar con el endpoint. Verifica tu conexión.';
+        this.cargando = false;
+      },
+      complete: () => {
+        this.cargando = false;
+      }
     });
+  }
+
+  // Método legacy (mantener para compatibilidad)
+  validarRegistro() {
+    this.guardarEnNube();
   }
 }
