@@ -27,7 +27,8 @@ export class ConsultaPage implements OnInit {
       next: (data) => {
         this.registros = data;
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error al cargar registros:', err);
         this.error = 'Error al cargar los registros';
         this.cargando = false;
       },
