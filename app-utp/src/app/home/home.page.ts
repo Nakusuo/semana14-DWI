@@ -58,7 +58,8 @@ export class HomePage implements OnInit {
         this.mensaje = resp.mensaje || 'Registro guardado correctamente.';
         this.router.navigate(['/detalle'], { queryParams: registro });
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error al conectar con el endpoint:', err);
         this.error = 'No se pudo conectar con el endpoint. Verifica tu conexión.';
         this.cargando = false;
       },

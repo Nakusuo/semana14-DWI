@@ -21,11 +21,22 @@ ion-item {
   --padding-start: 0;      // Alinea el texto perfectamente a la izquierda
   --inner-padding-end: 0;
   --background: transparent;
+  --color: #000000;        // Forzar texto negro en el item
   margin-bottom: 12px;     // Espacio entre campos
 
   ion-label {
-    color: #757575;        // Color de label más suave
+    color: #424242;        // Color de label más oscuro y legible
     font-weight: 500;
+  }
+
+  ion-input {
+    --color: #000000;      // Forzar texto negro en los inputs
+    color: #000000;
+  }
+
+  ion-select {
+    --color: #000000;      // Forzar texto negro en el select
+    color: #000000;
   }
 }
 
