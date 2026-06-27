@@ -1,18 +1,25 @@
 <ion-header>
   <ion-toolbar color="danger">
-    <ion-title>Detalle de registro</ion-title>
+    <ion-title>Detalle del Registro</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Datos recibidos</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p><b>Nombre:</b> {{ registro.nombre }}</p>
-      <p><b>Correo:</b> {{ registro.correo }}</p>
-      <p><b>Tipo:</b> {{ registro.tipoApp }}</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-button fill="clear" routerLink="/home"> Volver </ion-button>
+  <!-- Componente hijo: Resumen -->
+  <app-resumen-registro [registro]="registro"></app-resumen-registro>
+
+  <!-- Componente hijo: Selector -->
+  <app-selector-tipo (tipoCambiado)="actualizarTipo($event)"></app-selector-tipo>
+
+  <ion-item>
+    <ion-label>Tipo actual: {{ tipoActual }}</ion-label>
+  </ion-item>
+
+  <ion-button expand="block" color="primary" routerLink="/consulta" style="margin-top: 10px;">
+    Ver Todos los Registros
+  </ion-button>
+
+  <ion-button expand="block" color="medium" routerLink="/home">
+    Volver al Inicio
+  </ion-button>
 </ion-content>

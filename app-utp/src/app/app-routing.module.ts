@@ -16,7 +16,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },  {
+    path: 'consulta',
+    loadChildren: () => import('./consulta/consulta.module').then( m => m.ConsultaPageModule)
   },
+
 ];
 
 @NgModule({
