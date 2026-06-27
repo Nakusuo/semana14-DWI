@@ -29,7 +29,12 @@ export class ConsultaPage implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar registros:', err);
-        this.error = 'Error al cargar los registros';
+        if (err.status === 200) {
+          // Si el servidor responde 200 pero con texto plano (el mensaje "Hey ya! Great to see you here" de Beeceptor)
+          this.registros = [];
+        } else {
+          this.error = 'Error al cargar los registros';
+        }
         this.cargando = false;
       },
       complete: () => {
