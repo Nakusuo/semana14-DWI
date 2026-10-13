@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://github.com/Nakusuo"><img src="https://raw.githubusercontent.com/Nakusuo/Nakusuo/main/assets/covers/semana14-DWI.svg" width="100%" alt="semana14-DWI — Nakusu"/></a>
+</p>
+
 # Registro App UTP · Semana 14
 
 Una app móvil sencilla para **registrar usuarios y consultarlos** desde una API. La hice con **Ionic + Angular** para la semana 14 del curso de **Diseño y Desarrollo Web Integrado (DWI)**, y se puede empaquetar como APK de Android.
