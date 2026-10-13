@@ -1,72 +1,41 @@
-# 📱 Proyecto Semana 14 - DWI
+# Registro App UTP · Semana 14
 
-Este repositorio contiene la aplicación móvil desarrollada con **Ionic y Angular** para la semana 14 del curso de **Diseño y Desarrollo Web Integrado (DWI)**.
+Una app móvil sencilla para **registrar usuarios y consultarlos** desde una API. La hice con **Ionic + Angular** para la semana 14 del curso de **Diseño y Desarrollo Web Integrado (DWI)**, y se puede empaquetar como APK de Android.
 
----
+Es la continuación de la app de la [semana 11](https://github.com/Nakusuo/Semana-11-appMovil): ahí la validación era solo local; aquí los datos ya viajan a un servidor y se pueden volver a leer.
 
-## 🔗 Enlaces del Proyecto
+| Validaciones | Detalle del registro | Lista de registros |
+|---|---|---|
+| <img src="docs/capturas/01-validaciones.png" width="230" alt="Formulario con mensajes de validación"/> | <img src="docs/capturas/02-detalle.png" width="230" alt="Resumen del registro guardado"/> | <img src="docs/capturas/03-consulta.png" width="230" alt="Lista de registros desde la API"/> |
 
-* **Repositorio de GitHub:** [https://github.com/Nakusuo/semana14-DWI](https://github.com/Nakusuo/semana14-DWI)
-* **Rama Principal:** `main`
-* **Endpoints de la API (Mock en Beeceptor):** [https://app.beeceptor.com/console/utp-14](https://app.beeceptor.com/console/utp-14)
-  * **POST** Guardar Registro: [https://utp-14.free.beeceptor.com/registros](https://utp-14.free.beeceptor.com/registros)
-  * **GET** Listar Registros: [https://utp-14.free.beeceptor.com/registros](https://utp-14.free.beeceptor.com/registros)
+## Qué aprendí haciéndola
 
----
+- **Formularios reactivos** con validaciones (nombre de al menos 3 letras, correo válido, tipo obligatorio) y mensajes debajo de cada campo.
+- **Consumir una API** con `HttpClient`: un `POST` para guardar el registro y un `GET` para listarlos, con estados de carga y de error.
+- **Navegar entre páginas** pasando datos: al guardar, la app abre el detalle con lo que se registró.
+- **Componentes que se hablan**: el resumen recibe el registro con `@Input` y el selector de tipo avisa el cambio con `@Output`.
+- **Deslizar para refrescar** la lista de registros.
 
-## 🛠️ Requisitos Previos
+## Sobre la API
 
-Antes de ejecutar la aplicación, asegúrate de tener instalado:
-* **Node.js** (versión LTS recomendada)
-* **npm** (gestor de paquetes de Node)
-* **Ionic CLI** (opcional, instalado globalmente mediante `npm install -g @ionic/cli`)
+La API era un mock en [Beeceptor](https://beeceptor.com) (`https://utp-14.free.beeceptor.com/registros`). Ese endpoint gratuito ya no responde, así que las capturas se tomaron simulando en el navegador la misma respuesta que daba. Si quieres probarla con un backend real, cambia `apiBaseUrl` en `app-utp/src/environments/environment.ts` por tu propio endpoint de Beeceptor u otra API con `POST` y `GET` en `/registros`.
 
----
+## Con qué está hecha
 
-## 🚀 Instrucciones de Ejecución
+Ionic 8, Angular 20, TypeScript y Capacitor para Android.
 
-Sigue estos pasos para clonar y ejecutar el proyecto en tu entorno local:
+## Cómo correrla
 
-### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/Nakusuo/semana14-DWI.git
-cd semana14-DWI/app-utp
-```
-
-### 2. Instalar dependencias
-```bash
+cd app-utp
 npm install
+npm start          # http://localhost:4200
 ```
 
-### 3. Iniciar el servidor de desarrollo
-Para probar la aplicación en el navegador web local:
+Para generar el APK de Android:
+
 ```bash
-npm start
+./generar-apk.sh   # en Windows: generar-apk.bat
 ```
-*La aplicación estará disponible en [http://localhost:4200](http://localhost:4200)*
 
----
-
-## 📱 Compilación para Android
-
-Si deseas compilar la aplicación para dispositivos Android y generar el archivo APK:
-
-1. Ejecuta el script automatizado proporcionado:
-   ```bash
-   ./generar-apk.sh
-   ```
-2. O ejecuta los comandos manualmente:
-   ```bash
-   # Construir el proyecto web
-   npm run build
-
-   # Sincronizar los archivos con Capacitor
-   npx cap sync
-
-   # Compilar el APK de depuración (Debug APK)
-   cd android
-   ./gradlew assembleDebug
-   ```
-
-El archivo APK resultante se generará en la ruta:
-`android/app/build/outputs/apk/debug/app-debug.apk`
+O a mano: `npm run build`, `npx cap sync` y `cd android && ./gradlew assembleDebug`. El APK queda en `android/app/build/outputs/apk/debug/app-debug.apk`.
